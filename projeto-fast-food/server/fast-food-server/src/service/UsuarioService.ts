@@ -15,7 +15,7 @@ export class UsuarioService extends GenericService<Usuario> {
     private readonly userRepository: Repository<Usuario>,
     private readonly jwtService: JwtService,
   ) {
-    super(Usuario, userRepository)
+    super(userRepository)
   }
 
   async authenticateUser(credentials: { email: string; senha: string }): Promise<string> {

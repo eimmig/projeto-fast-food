@@ -10,6 +10,6 @@ export class PedidoService extends GenericService<Pedido> {
     @InjectRepository(Pedido)
     private readonly pedidoRepository: Repository<Pedido>,
   ) {
-    super(Pedido, pedidoRepository)
+    super(pedidoRepository)
   }
 }

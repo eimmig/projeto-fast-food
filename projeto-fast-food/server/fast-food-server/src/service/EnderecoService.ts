@@ -10,6 +10,6 @@ export class EnderecoService extends GenericService<Endereco> {
     @InjectRepository(Endereco)
     private readonly enderecoRepository: Repository<Endereco>,
   ) {
-    super(Endereco, enderecoRepository)
+    super(enderecoRepository)
   }
 }
