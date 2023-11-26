@@ -1,12 +1,10 @@
-import { Repository, DeepPartial, ObjectType } from 'typeorm';
+import { Repository, DeepPartial } from 'typeorm';
 import {  } from '@nestjs/typeorm';
 
 export class GenericService<T> {
-  private readonly entityClass: ObjectType<T>;
   private readonly repository: Repository<T>;
 
-  constructor(entityClass: ObjectType<T>, repositoryClass: Repository<T>) {
-    this.entityClass = entityClass;
+  constructor(repositoryClass: Repository<T>) {
     this.repository = repositoryClass;
   }
 
