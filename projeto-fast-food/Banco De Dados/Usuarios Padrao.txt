@@ -1,0 +1,9 @@
+Usuário Restaurante: 
+
+Email - restaurantefastfood@gmail.com
+Senha - 123
+
+Usuário Cliente: 
+
+Email - teste6@gmail.com
+Senha - 1234

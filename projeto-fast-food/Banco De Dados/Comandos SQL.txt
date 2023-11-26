@@ -1,0 +1,80 @@
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cpf_cnpj VARCHAR(14) NOT NULL,
+    telefone VARCHAR(15),
+    senha VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE endereco (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    rua VARCHAR(255) NOT NULL,
+    bairro VARCHAR(255) NOT NULL,
+    numero VARCHAR(10),
+    complemento VARCHAR(255),
+    cidade VARCHAR(255) NOT NULL,
+    estado VARCHAR(255) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+CREATE TABLE categoria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE produto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
+    categoria_id INT,
+    ativo BOOLEAN DEFAULT true,
+    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
+);
+
+CREATE TABLE pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    valor_total DECIMAL(10, 2) NOT NULL,
+    usuario_id INT,
+    endereco_id INT,
+    status VARCHAR(20),
+    data_pedido TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+    FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+);
+
+CREATE TABLE pedido_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT,
+    produto_id INT,
+    quantidade INT NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedido(id),
+    FOREIGN KEY (produto_id) REFERENCES produto(id)
+);
+
+ALTER TABLE usuario
+ADD COLUMN endereco_id INT,
+ADD CONSTRAINT fk_endereco_usuario FOREIGN KEY (endereco_id) REFERENCES endereco(id);
+
+
+Comandos sql:
+-- Contar o número de registros na tabela 'pedido' onde o 'usuarioId' é 4
+SELECT COUNT(*) FROM pedido p WHERE p.usuarioId = 4;
+
+-- Alterar o nome na tabela 'usuario' para 'NOME ALTERADO' onde o 'id' é 5
+ALTER TABLE usuario SET nome = 'NOME ALTERADO' WHERE id = 5;
+
+-- Inserir um novo registro na tabela 'usuario'
+INSERT INTO public.usuario
+  (nome, senha, email, enderecoId, cpf_cnpj, telefone)
+VALUES
+  ('Cliente 6', '1234', 'teste6@gmail.com', NULL, '509.894.690-50', '(34) 2377-0838');
+
+-- Excluir registros da tabela 'usuario' onde o 'id' é o máximo (último) e 'enderecoId' é NULL
+DELETE FROM public.usuario
+WHERE usuario.id = (
+    SELECT max_id
+    FROM (SELECT max(u.id) as max_id FROM usuario u WHERE u.enderecoId IS NULL) as max_id_table)
