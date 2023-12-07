@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './AuthenticationPage.css'; 
 import AuthService from './../../services/Auth/AuthService';
 import CpfCnpjInput from '../mask/CpfCnpj';
@@ -49,7 +48,7 @@ const AuthenticationPage = () => {
   };
 
   return (
-    <div className={`container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
+    <div className={`containerCadastro ${isSignUpMode ? 'sign-up-mode' : ''}`}>
       <div className="forms-container">
         <div className="signin-signup">
           <form action="#" className="sign-in-form" onSubmit={handleSubmit}>

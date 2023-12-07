@@ -1,0 +1,33 @@
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .form-inline {
+    margin-right: 20px;
+  }
+  
+  .form-control {
+    width: 300px;
+  }
+  
+  .input-group-addon {
+    cursor: pointer;
+  }
+  
+  .btn-link {
+    margin-left: auto;
+  }
+  
+  .no-shadow:focus {
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important;
+  }
+  
+  .no-underline:hover {
+    text-decoration: none !important;
+  }

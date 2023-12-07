@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Get } from '@nestjs/common';
 import { Usuario } from 'src/model/usuario.model';
 import { UsuarioService } from 'src/service/UsuarioService';
 import { GenericController } from './GenericController';
@@ -42,6 +42,13 @@ export class  UsuarioController extends GenericController<Usuario> {
     }
 
     return { token };
+  }
+
+  @Get('/getCompanies')
+  async getCompanies() {
+    const companies = await this.usuarioService.getCompanies();
+
+    return { companies };
   }
   
 }

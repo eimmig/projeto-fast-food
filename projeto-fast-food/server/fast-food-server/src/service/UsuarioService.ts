@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Raw, Repository } from 'typeorm';
 import { Usuario } from '../model/usuario.model';
 import { JwtService } from '@nestjs/jwt';
 import { GenericService } from './GenericService';
@@ -9,7 +9,7 @@ import * as cpfValidator from 'cpf-cnpj-validator';
 
 
 @Injectable()
-export class UsuarioService extends GenericService<Usuario> { 
+export class UsuarioService extends GenericService<Usuario> {
   constructor(
     @InjectRepository(Usuario)
     private readonly userRepository: Repository<Usuario>,
@@ -51,4 +51,12 @@ export class UsuarioService extends GenericService<Usuario> {
     const user = await this.  userRepository.findOneBy({ email: email });
     return user ? true : false;
   }
+
+  getCompanies() {
+    return this.userRepository.find({
+      where: {
+        cpf_cnpj: Raw(alias => `${alias} IS NOT NULL AND LENGTH(${alias}) >= 15`), 
+      },
+    });
+  } 
 }

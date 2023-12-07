@@ -1,0 +1,122 @@
+Search
+.Search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.Search img {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.Search input {
+  padding-left: 3rem;
+}
+
+.SectionButtonSearch {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  width: 360px;
+  height: 56px;
+}
+
+.SectionButtonSearch p {
+  margin: 10px;
+}
+
+.SectionButtonSearch img {
+  margin-left: 0.1063rem;
+}
+
+.SearchButton {
+  color: grey;
+  border: 1px solid rgb(216, 71, 4);
+  width: 100%;
+  margin-top: -0.5rem;
+  border-radius: 15px;
+}
+
+.Categories {
+  display: grid;
+  gap: 0.5rem;
+  overflow-x: scroll;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.Categories::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+.Categories::-webkit-scrollbar-thumb {
+  background: #b8b8b8;
+  border-radius: 4px;
+}
+
+.Categories::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+.Categories li {
+  width: 5.438rem;
+  height: 2.625rem;
+  grid-row: 1/-1;
+}
+
+.Categories button {
+  color: #000;
+  background: #fff;
+  border-radius: 4px;
+  padding: 0.75rem 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .Categories {
+    padding: 0;
+    width: 100vw;
+  }
+
+  .Categories::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+  }
+}
+
+.Cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Button {
+  margin-left: 95%;
+  color: white;
+  background-color: rgb(216, 71, 4);
+  width: 5%;
+  height: 80%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+@media screen and (max-width: 800px) {
+  .Button {
+    padding: 0;
+    margin-left: 80%;
+
+  }
+}
+
+
+.Button:hover {
+  background-color: rgb(231, 42, 8) !important;
+  color: white;
+}

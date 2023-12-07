@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "../components/Side-Bar/SideBar";
+import Company from "../components/Company/Company/Company";
+import MenuPage from './../components/menu/MenuPage';
 const AuthenticatedRoutes = () => {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Sidebar/>} />
+                <Route path="/" element={<Company/>} />
+                <Route path="/:companyId" element={<MenuPage />} />
             </Routes>
         </div>
     );

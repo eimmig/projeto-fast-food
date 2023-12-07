@@ -1,0 +1,30 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  .card-image img {
+    width: 100%;
+    display: block;
+    height: 200px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .card-container {
+    padding: 16px;
+  }
+
+  .text-bold {
+    font-weight: bold;
+  }
+
+  .h6 {
+    font-size: 16px; /* ou qualquer tamanho desejado */
+  }

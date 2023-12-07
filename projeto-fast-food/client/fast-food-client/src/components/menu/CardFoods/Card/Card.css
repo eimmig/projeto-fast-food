@@ -1,0 +1,28 @@
+.Card {
+   border-radius: 8px;
+   border: solid 1px #b8b8b8;
+   margin-bottom: 0.5rem;
+   cursor: pointer;
+   width: 100%;
+ }
+ 
+ .Card img {
+   border-radius: 8px 8px 0 0;
+   object-fit: cover;
+   width: 100%;
+ }
+ 
+ .Card figcaption {
+   padding: 1rem;
+ }
+ 
+ .Card h4 {
+   color: #e8222e;
+   margin-bottom: 0.25rem;
+ }
+ 
+ .Card div {
+   display: flex;
+   justify-content: space-between;
+   color: #b8b8b8;
+ }
