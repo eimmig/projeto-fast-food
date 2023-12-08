@@ -17,4 +17,11 @@ export class ProdutoService extends GenericService<Produto> {
     return await this.produtoRepository.find({ relations: ["categoria"] });
   }
 
+  async getByUser(id: number): Promise<Produto[]> {
+    return await this.produtoRepository.find({
+      where: { usuario: { id } },
+      relations: ['categoria'],
+    });
+  }
+
 }

@@ -18,12 +18,13 @@ export class UsuarioService extends GenericService<Usuario> {
     super(userRepository)
   }
 
-  async authenticateUser(credentials: { email: string; senha: string }): Promise<string> {
+  async authenticateUser(credentials: { email: string; senha: string }): Promise<[string, number]> {
     const user = await this.userRepository.findOneBy({ email: credentials.email });
 
     if (user && user.senha === credentials.senha) {
       const payload = { email: user.email, sub: user.id };
-      return this.jwtService.sign(payload);
+      const token = this.jwtService.sign(payload);
+      return [token, user.id];
     }
 
     return null;
@@ -59,4 +60,11 @@ export class UsuarioService extends GenericService<Usuario> {
       },
     });
   } 
+
+  async getById(id: number): Promise<Usuario | undefined> {
+    return this.userRepository.findOne({
+      where: { id: id },
+      relations: ['endereco'],
+    });
+  }
 }

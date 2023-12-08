@@ -1,7 +1,6 @@
 import { Feed } from "./Feed/Feed";
 
-const MenuPage = ({ companyId }) => {
-  console.log("caiu")
+const MenuPage = () => {
     return (
      <Feed></Feed>
     );

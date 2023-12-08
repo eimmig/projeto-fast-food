@@ -1,0 +1,88 @@
+.UserInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    width: 100%;
+}
+
+.UserInfo div p {
+    &:nth-child(1),
+    &:nth-child(2) {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.UserInfo.Address {
+    background: #ffffff;
+    border-radius: 8px;
+    border: solid 1px #b8b8b8;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+}
+
+.UserInfo.Address div p {
+    &:nth-child(1) {
+        color: #b8b8b8;
+    }
+    &:nth-child(2) {
+        margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 420px) {
+        position: relative;
+        width: 100%; 
+    }
+}
+
+.EditIcon img {
+    min-width: 1.5rem;
+    width: 1.5rem;
+}
+
+.OrderHistory {
+    padding: 1rem 0;
+}
+
+.OrderHistory h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.TitleCard {
+    font-size: 1rem;
+    letter-spacing: -0.39px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+
+    &::after {
+        display: block;
+        content: "";
+        border-bottom: 2px solid #000;
+        margin-top: 0.5rem;
+    }
+}
+
+.OrderItem {
+    border-radius: 8px;
+    border: solid 1px #b8b8b8;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.OrderItem p {
+    &:nth-child(1) {
+        color: #e8222e;
+        margin-bottom: 0.563rem;
+    }
+
+    &:nth-child(2) {
+        font-size: 0.75rem;
+        margin-bottom: 0.438rem;
+    }
+
+    &:nth-child(3) {
+        font-weight: bold;
+    }
+}

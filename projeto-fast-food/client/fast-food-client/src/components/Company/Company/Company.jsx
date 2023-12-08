@@ -49,6 +49,7 @@ const Company = () => {
   };
 
   const handleCardClick = (companyId) => {
+    localStorage.setItem('companyId', companyId);
     navigate(`/${companyId}`);
   }
 

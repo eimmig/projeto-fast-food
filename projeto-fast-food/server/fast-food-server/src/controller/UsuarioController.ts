@@ -34,13 +34,13 @@ export class  UsuarioController extends GenericController<Usuario> {
 
   @Post('/login')
   async login(@Body() credentials: { email: string; senha: string }) {
-    const token = await this.usuarioService.authenticateUser(credentials);
+    const [token, userId] = await this.usuarioService.authenticateUser(credentials);
 
     if (!token) {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    return { token };
+    return { token, userId };
   }
 
   @Get('/getCompanies')

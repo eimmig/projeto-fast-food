@@ -23,7 +23,8 @@ const login = (user) => {
     .post(BASE_URL + "/user/login", user)
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("token", JSON.stringify(response.data));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("userId", JSON.stringify(response.data.userId));
         toast.success("Usuário logado com sucesso!");
         window.location.href = '/';
       } else {
