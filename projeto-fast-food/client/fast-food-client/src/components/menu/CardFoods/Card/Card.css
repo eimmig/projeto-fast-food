@@ -6,12 +6,6 @@
    width: 100%;
  }
  
- .Card img {
-   border-radius: 8px 8px 0 0;
-   object-fit: cover;
-   width: 100%;
- }
- 
  .Card figcaption {
    padding: 1rem;
  }
@@ -26,3 +20,21 @@
    justify-content: space-between;
    color: #b8b8b8;
  }
+
+ .Card .TextDiv {
+  margin-left: 90%;
+  width: 100%
+}
+
+
+@media screen and (max-width: 800px) {
+  .Card .TextDiv {
+    margin-left: 80%;
+    width: 100%
+  }
+}
+
+
+  .Card p {
+    text-align: center;
+  }

@@ -19,7 +19,7 @@ export class Usuario {
   @Column()
   senha: string;
 
-  @PrimaryColumn()
+  @Column({ unique: true })
   email: string;
 
   @ManyToOne(() => Endereco, endereco => endereco.id)

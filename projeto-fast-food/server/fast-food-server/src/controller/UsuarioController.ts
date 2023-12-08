@@ -9,7 +9,6 @@ export class  UsuarioController extends GenericController<Usuario> {
     super(usuarioService);
   }
 
-
   @Post('/signup')
   async signUp(@Body() userData: any) {
 

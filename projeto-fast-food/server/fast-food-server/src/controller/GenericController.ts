@@ -9,8 +9,8 @@ export  class GenericController<T> {
     this.genericService.save(item);
   }
 
-  @Get(':id')
-  async getById(id: string): Promise<T | undefined> {
+  @Get('/get/:id')
+  async getById(@Param('id') id: string): Promise<T | undefined> {
     return await this.genericService.getById(parseInt(id, 10));
   }
 

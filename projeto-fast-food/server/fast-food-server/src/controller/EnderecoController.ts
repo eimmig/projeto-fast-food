@@ -4,7 +4,7 @@ import { GenericController } from './GenericController';
 import { Endereco } from 'src/model/endereco.model';
 
 @Controller('endereco')
-export class  CategoriaController extends GenericController<Endereco> {
+export class  EnderecoController extends GenericController<Endereco> {
   constructor(private readonly enderecoService: EnderecoService) {
     super(enderecoService);
   }

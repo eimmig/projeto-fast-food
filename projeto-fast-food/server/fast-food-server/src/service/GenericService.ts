@@ -14,12 +14,12 @@ export class GenericService<T> {
     return await this.repository.save(newItem);
   }
 
-  async getById(id: string | number): Promise<T | undefined> {
-    return this.repository.findOneById(id);
-  }
-
   async getAll(): Promise<T[]> {
     return this.repository.find();
+  }
+
+  async getById(id: string | number): Promise<T | undefined> {
+    return this.repository.findOneById(id);
   }
 
   async delete(id: string | number): Promise<void> {

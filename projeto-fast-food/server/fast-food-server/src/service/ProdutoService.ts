@@ -12,4 +12,9 @@ export class ProdutoService extends GenericService<Produto> {
   ) {
     super(produtoRepository)
   }
+
+  async getAll(): Promise<Produto[]> {
+    return await this.produtoRepository.find({ relations: ["categoria"] });
+  }
+
 }

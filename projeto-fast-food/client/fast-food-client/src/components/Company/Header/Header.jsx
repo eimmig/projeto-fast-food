@@ -30,7 +30,7 @@ const Header = ({ onSearch, onLogout }) => {
         className="ml-auto" 
         onClick={onLogout}
       >
-        Voltar
+        Sair
       </Button>
     </Navbar>
   );

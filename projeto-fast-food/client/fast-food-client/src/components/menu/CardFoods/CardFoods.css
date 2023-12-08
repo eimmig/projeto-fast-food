@@ -1,5 +1,3 @@
-.CircularProgress {
-   margin-top: 2rem;
-   position: absolute;
-   top: 50vh;
+.CardFoodsContainer {
+   width: 100%;
 }
