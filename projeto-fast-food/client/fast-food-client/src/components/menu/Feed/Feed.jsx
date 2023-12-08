@@ -103,7 +103,7 @@ export function Feed() {
        <div className="Menu">
          <button
            onClick={() => {
-             // Seu código para ir para a página inicial aqui
+            navigate("/"+localStorage.getItem('company'));
            }}
          >
            <img src={house2} width="27" height="27" alt="Home Icon" />
@@ -111,7 +111,7 @@ export function Feed() {
  
          <button
            onClick={() => {
-             // Seu código para ir para a página do carrinho aqui
+            navigate('/cart');
            }}
          >
            <img src={cart1} width="27" height="27" alt="Cart Icon" />

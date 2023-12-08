@@ -93,7 +93,7 @@ export function ProfilePage() {
  
          <button
            onClick={() => {
-             // Seu código para ir para a página do carrinho aqui
+            navigate('/cart');
            }}
          >
            <img src={cart1} width="27" height="27" alt="Cart Icon" />

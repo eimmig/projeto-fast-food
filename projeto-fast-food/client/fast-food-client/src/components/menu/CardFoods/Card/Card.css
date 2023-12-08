@@ -1,40 +1,40 @@
 .Card {
-   border-radius: 8px;
-   border: solid 1px #b8b8b8;
-   margin-bottom: 0.5rem;
-   cursor: pointer;
-   width: 100%;
- }
- 
- .Card figcaption {
-   padding: 1rem;
- }
- 
- .Card h4 {
-   color: #e8222e;
-   margin-bottom: 0.25rem;
- }
- 
- .Card div {
-   display: flex;
-   justify-content: space-between;
-   color: #b8b8b8;
- }
+  border-radius: 8px;
+  border: solid 1px #b8b8b8;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+}
 
- .Card .TextDiv {
-  margin-left: 90%;
-  width: 100%
+.CardIntern figcaption {
+  padding: 1rem;
+}
+
+.CardIntern h4 {
+  color: #e8222e;
+  margin-bottom: 0.25rem;
+}
+
+.CardIntern div {
+  display: flex;
+  justify-content: space-between;
+  color: #b8b8b8;
+}
+
+.Card .TextDiv {
+ margin-left: 90%;
+ width: 100%
 }
 
 
 @media screen and (max-width: 800px) {
-  .Card .TextDiv {
-    margin-left: 80%;
-    width: 100%
-  }
+ .Card .TextDiv {
+   margin-left: 80%;
+   width: 100%
+ }
 }
 
 
-  .Card p {
-    text-align: center;
-  }
+ .Card p {
+   text-align: center;
+ }

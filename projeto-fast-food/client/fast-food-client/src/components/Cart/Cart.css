@@ -1,0 +1,108 @@
+.MainCards {
+   border-radius: 8px;
+   margin-top: 1rem;
+
+   @media screen and (max-width: 420px) {
+       margin-top: 6rem;
+   }
+}
+
+.MainCards img {
+   object-fit: cover;
+   border-radius: 8px 8px 0 0;
+   margin-bottom: 0.75rem;
+   width: 100%;
+}
+
+.MainCards figcaption {
+   margin-bottom: 0.5rem;
+}
+
+.MainCards figcaption h4 {
+   color: #e8222e;
+   font-weight: normal;
+   margin-bottom: 0.5rem;
+}
+
+.MainCards figcaption ul {
+   display: grid;
+   gap: 0.5rem;
+   color: #b8b8b8;
+}
+
+.MainCards figcaption ul li {
+   display: flex;
+   gap: 2rem;
+}
+
+.Shipping {
+   text-align: right;
+   margin-bottom: 0.813rem;
+}
+
+.Subtotal {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 1.5rem;
+}
+
+.Subtotal p {
+   text-transform: uppercase;
+   &:last-child {
+      color: #e8222e;
+      font-size: 1.125rem;
+      font-weight: bold;
+   }
+}
+
+.Form div {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+
+   &:first-of-type {
+      margin-bottom: 0.5rem;
+   }
+
+   &:last-of-type {
+      margin-bottom: 0.3rem;
+   }
+
+   input {
+      width: 1.25rem;
+      height: 1.25rem;
+   }
+}
+
+.TitleCard {
+   font-size: 1rem;
+   font-weight: normal;
+   letter-spacing: -0.39px;
+   margin-top: 1rem;
+   margin-bottom: 0.5rem;
+
+   &::after {
+      display: block;
+      content: "";
+      border-bottom: 2px solid #000;
+      margin-top: 0.5rem;
+   }
+}
+
+.Button {
+   background: #e8222e;
+   border: none;
+   border-radius: 2px;
+   padding: 0.75rem 1rem;
+   letter-spacing: -0.39px;
+   margin-top: 0.688rem;
+   margin-bottom: 1.75rem;
+   width: 100%;
+}
+
+.SecondaryCard {
+   &:last-of-type {
+      margin-bottom: 0.95rem;
+   }
+}
