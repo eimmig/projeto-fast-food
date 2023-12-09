@@ -18,21 +18,29 @@ export class UsuarioService extends GenericService<Usuario> {
     super(userRepository)
   }
 
-  async authenticateUser(credentials: { email: string; senha: string }): Promise<[string, number]> {
-    const user = await this.userRepository.findOneBy({ email: credentials.email });
+  async authenticateUser(credentials: { email: string; senha: string }): Promise<[string, Usuario]> {
+    const user = await this.userRepository.findOne({
+      where: { email: credentials.email },
+      relations: ['endereco'],
+    });
 
     if (user && user.senha === credentials.senha) {
       const payload = { email: user.email, sub: user.id };
       const token = this.jwtService.sign(payload);
-      return [token, user.id];
+      return [token, user];
     }
 
     return null;
   }
 
-  async validateUserByJwt(token: string): Promise<Usuario> {
-    const decoded = this.jwtService.verify(token);
-    return this.userRepository.findOne(decoded.sub);
+  async validateUserByJwt(token: string): Promise<Boolean> {
+    let decoded = null
+    try {
+      decoded = this.jwtService.verify(token);
+    } catch (error) {
+
+    }
+    return decoded ? true : false;
   }
 
   validarCpf(cpf: string): boolean {
@@ -67,4 +75,14 @@ export class UsuarioService extends GenericService<Usuario> {
       relations: ['endereco'],
     });
   }
+
+  async update(id: string | number, updatedItem): Promise<void> {
+    const user = await this.userRepository.findOneById(id);
+    user.email = updatedItem.email;
+    user.nome = updatedItem.name;
+    user.telefone = updatedItem.telefone;
+
+    await this.userRepository.update(id, user);
+  }
+
 }

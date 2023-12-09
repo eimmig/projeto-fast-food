@@ -1,0 +1,10 @@
+.inputPrincipal {
+    width: 5%;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #b8b8b8;
+    padding-left: 10px;
+    font-size: 16px;
+    outline: none;
+    margin-left: 65%;
+}

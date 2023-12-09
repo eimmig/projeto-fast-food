@@ -18,10 +18,11 @@ import { ProdutoService } from 'src/service/ProdutoService';
 import { EmailService } from 'src/service/EmailService';
 import { Pedido } from 'src/model/pedido.model';
 import { Produto } from 'src/model/produto.model';
+import { PedidoItem } from 'src/model/pedido_item.model';
 
 @Module({
   imports: [
-  TypeOrmModule.forFeature([Usuario, Categoria, Endereco, Produto, Pedido]),
+  TypeOrmModule.forFeature([Usuario, Categoria, Endereco, Produto, Pedido, PedidoItem]),
     JwtModule.register({
       secret: 'projeto-restaurante-fast-food-token',
       signOptions: { expiresIn: '1h' },

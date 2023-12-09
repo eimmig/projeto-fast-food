@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException, Get } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Get, Param } from '@nestjs/common';
 import { Usuario } from 'src/model/usuario.model';
 import { UsuarioService } from 'src/service/UsuarioService';
 import { GenericController } from './GenericController';
@@ -34,13 +34,13 @@ export class  UsuarioController extends GenericController<Usuario> {
 
   @Post('/login')
   async login(@Body() credentials: { email: string; senha: string }) {
-    const [token, userId] = await this.usuarioService.authenticateUser(credentials);
+    const [token, user] = await this.usuarioService.authenticateUser(credentials);
 
     if (!token) {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    return { token, userId };
+    return { token, user };
   }
 
   @Get('/getCompanies')
@@ -48,6 +48,13 @@ export class  UsuarioController extends GenericController<Usuario> {
     const companies = await this.usuarioService.getCompanies();
 
     return { companies };
+  }
+
+  @Get('/getValidUser/:token')
+  async getValidUser(@Param('token') token: string) {
+    const validUser = await this.usuarioService.validateUserByJwt(token);
+
+    return { validUser };
   }
   
 }

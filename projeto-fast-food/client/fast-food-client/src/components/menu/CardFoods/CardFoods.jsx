@@ -3,7 +3,6 @@ import { CircularProgress } from "@mui/material";
 import { Card } from "./Card/Card";
 import axios from "axios";
 import "./CardFoods.css";
-import { useParams } from "react-router-dom";
 
 const CardFoods = ({ categories, inputSearch }) => {
   const companyId = localStorage.getItem('companyId');

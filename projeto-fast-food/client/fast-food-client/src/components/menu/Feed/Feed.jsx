@@ -103,7 +103,7 @@ export function Feed() {
        <div className="Menu">
          <button
            onClick={() => {
-            navigate("/"+localStorage.getItem('company'));
+            navigate("/"+ localStorage.getItem("companyId"));
            }}
          >
            <img src={house2} width="27" height="27" alt="Home Icon" />

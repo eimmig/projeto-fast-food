@@ -22,4 +22,7 @@ export class Pedido {
 
   @Column()
   data_pedido: Date;
+
+  @ManyToOne(() => Usuario, usuario => usuario.id)
+  usuario_empresa: Usuario;
 }

@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import house1 from "../../assets/img/icon/house1.svg";
 import cart2 from "../../assets/img/icon/cart2.svg";
 import avatar1 from "../../assets/img/icon/avatar1.svg";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 import "./Cart.css";
-
 
 export function Cart() {
   const navigate = useNavigate();
@@ -12,9 +14,21 @@ export function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
   const [cartProducts, setCartProducts] = useState(JSON.parse(localStorage.getItem("cartProducts")) || []);
   const restaurantDetail = JSON.parse(localStorage.getItem("restaurantDetail")) || {};
+  const [subtotal, setSubtotal] = useState(0);
+  const [deliveryOption, setDeliveryOption] = useState("");
+  const [loading, setLoading] = useState(false);
+  
+  const calculateSubtotal = () => {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity * item.valor;
+    });
+    setSubtotal(total);
+  };
 
   const removeItem = (idProduto, quantidade) => {
-    if (quantidade > 0) {
+    if (quantidade > 1) {
+      debugger;
       const updatedCart = cart.map((item) => {
         if (idProduto === item.id) {
           return {
@@ -40,6 +54,7 @@ export function Cart() {
 
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       localStorage.setItem("cartProducts", JSON.stringify(updatedCartProducts));
+      calculateSubtotal();
     } else {
       const filteredCart = cart.filter((item) => idProduto !== item.id);
       const filteredCartProducts = cartProducts.filter((item) => idProduto !== item.id);
@@ -49,6 +64,7 @@ export function Cart() {
 
       localStorage.setItem("cart", JSON.stringify(filteredCart));
       localStorage.setItem("cartProducts", JSON.stringify(filteredCartProducts));
+      calculateSubtotal();
     }
   };
 
@@ -57,18 +73,18 @@ export function Cart() {
     cart &&
     cart.map((prod) => {
       return (
-        <div className="SecondaryCard" key={prod.id}>
+        <div className="MainCards SecondaryCard" key={prod.id}>
           <img src="/undraw_breakfast_psiw.svg" alt={prod.nome} />
           <figcaption>
-            <p>{prod.nome}</p>
-            <p>{prod.categoria.nome}</p>
+            <p>Nome: {prod.nome} - {prod.categoria.nome}</p>
             <p>
+              Valor:
               {prod.valor.toLocaleString("pt-br", {
                 style: "currency",
                 currency: "BRL",
               })}
             </p>
-            <p className="view">{prod.quantity}</p>
+            <p className="view">Quantidade:{prod.quantity}</p>
             <button className="btn-remove" onClick={() => removeItem(prod.id, prod.quantity)}>
               remover
             </button>
@@ -79,6 +95,48 @@ export function Cart() {
 
   const checkCart = cart.length !== 0 ? <>{mapCart}</> : <p className="emptyCart">Carrinho vazio</p>;
 
+  const handleConfirm = async () => {
+    try {
+      if (cart.length === 0) {
+        toast.error("Seu carrinho está vazio!");
+        return;
+      }
+      
+      if (!deliveryOption) {
+        toast.error("Selecione uma opção de entrega!");
+        return;
+      }
+      setLoading(true);
+      const enderecoId = document.querySelector(".Endereco-Id").id;
+      const usuarioId = JSON.parse(localStorage.getItem("user")).id;
+      const company = localStorage.getItem("companyId");
+      const data = {
+        cart,
+        subtotal,
+        deliveryOption,
+        enderecoId,
+        usuarioId,
+        company
+      };
+      const response = await axios.post("http://localhost:3000/pedido/save", data);
+        toast.success("Pedido Salvo com Sucesso!");
+        setLoading(false);
+        localStorage.removeItem("cart");
+        navigate("/profile");
+    } catch (error) {
+      console.error("Erro ao confirmar pedido:", error);
+      toast.error("Erro ao confirmar pedido!");
+    }
+  };
+
+  const handleDeliveryOptionChange = (event) => {
+    setDeliveryOption(event.target.id);
+  };
+
+  useEffect(() => {
+    calculateSubtotal();
+  }, []);
+
   return (
     <div className="Container">
       <div className="NavbarContainer">
@@ -86,74 +144,64 @@ export function Cart() {
       </div>
 
       <div className="Contents">
-        <div className="Address">
+        <div className="AddressProduct">
           <div>
             <p>Endereço de entrega</p>
-            <p>{user.address}</p>
+            <p className="Endereco-Id" id={user.endereco.id}>{user.endereco.rua} - {user.endereco.numero} - {user.endereco.bairro} - {user.endereco.cidade} - {user.endereco.estado}</p>
           </div>
         </div>
 
-        {cart.length > 0 ? (
-          <figure className="MainCards">
-            <figcaption>
-              <h4>{restaurantDetail.name}</h4>
-              <ul>
-                <li>{restaurantDetail.address}</li>
-                <li>
-                  {restaurantDetail.deliveryTime} - {Math.round(restaurantDetail.deliveryTime * 0.25) + restaurantDetail.deliveryTime} min
-                </li>
-              </ul>
-            </figcaption>
-          </figure>
-        ) : null}
+        <legend>
+          <h3 className="TitleCard"></h3>
+        </legend>
 
         <div>{checkCart}</div>
 
-        {cart.length > 0 ? (
-          <p className="Shipping">
-            {cart.length !== 0 ? (
-              <>
-                Frete {"0".toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </>
-            ) : (
-              <>Frete R$ 0,00</>
-            )}
-          </p>
-        ) : null}
-
         <div className="Subtotal">
           <p>Subtotal</p>
-          <p>R$00,00 </p>
+          <p>R${subtotal.toFixed(2)}</p>
         </div>
 
         <form className="Form">
           <legend>
-            <h3 className="TitleCard">Forma de pagamento</h3>
+            <h3 className="TitleCard">Entrega</h3>
           </legend>
 
-          <div>
-            <input type="radio" name="forma_pagamento" id="dinheiro" />
-            <label htmlFor="dinheiro">Dinheiro</label>
+          <div className="radioButton">
+            <input
+              type="radio"
+              name="forma_entrega"
+              id="local"
+              checked={deliveryOption === "local"}
+              onChange={handleDeliveryOptionChange}
+            />
+            <label htmlFor="local">Retirar no Local</label>
           </div>
 
-          <div>
-            <input type="radio" name="forma_pagamento" id="credito" />
-            <label htmlFor="credito">Cartão de crédito</label>
+          <div className="radioButton">
+            <input
+              type="radio"
+              name="forma_entrega"
+              id="delivery"
+              checked={deliveryOption === "delivery"}
+              onChange={handleDeliveryOptionChange}
+            />
+            <label htmlFor="delivery">Entrega Delivery</label>
           </div>
         </form>
-
-        <button className="Button">
-          <button>Confirmar</button>
+        {loading ? (
+        <CircularProgress className="CircularProgress" size={64} color={"inherit"} />
+      ) : (
+        <button className="Button-Confirmar" onClick={handleConfirm}>
+          Confirmar
         </button>
+      )}
       </div>
 
       <div className="Menu">
         <button
           onClick={() => {
-            navigate("/" + localStorage.getItem("company"));
+            navigate("/" + localStorage.getItem("companyId"));
           }}
         >
           <img src={house1} width="27" height="27" alt="Home Icon" />
@@ -169,7 +217,7 @@ export function Cart() {
 
         <button
           onClick={() => {
-            navigate("/profile/" + localStorage.getItem("userId"));
+            navigate("/profile/");
           }}
         >
           <img src={avatar1} width="27" height="27" alt="Profile Icon" />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Card.css";
-import { CardDetail } from "./CardDetail/CardDetail";
+import { CardDetail } from "../CardDetail/CardDetail";
 
 export function Card({ produto }) {
   const [showDetail, setShowDetail] = useState(false);

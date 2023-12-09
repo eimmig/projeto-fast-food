@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
+import { UseForm } from "../../../../services/useForm";
 import './CardDetail.css';
-import { UseForm } from './../../../../../services/useForm';
 
 export function CardDetail({ product }) {
   const [open, setOpen] = useState(false);
@@ -14,6 +14,7 @@ export function CardDetail({ product }) {
     handleInputChange(e);
   };
 
+
   const addCart = (id) => {
     const storedCartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -21,10 +22,10 @@ export function CardDetail({ product }) {
     const itemCart = storedCart.find((item) => id === item.id);
 
     if (itemCart) {
-      const updatedCartProducts = storedCartProducts.map((item) => (id === item.id ? { ...item, quantity: item.quantity + parseInt(Number(form.quantity)) } : item));
+      const updatedCartProducts = storedCartProducts.map((item) => (id === item.id ? { ...item, quantity: parseInt(Number(form.quantity)) } : item));
       localStorage.setItem("cartProducts", JSON.stringify(updatedCartProducts));
 
-      const updatedCart = storedCart.map((item) => (id === item.id ? { ...item, quantity: item.quantity + parseInt(Number(form.quantity)) } : item));
+      const updatedCart = storedCart.map((item) => (id === item.id ? { ...item, quantity: parseInt(Number(form.quantity)) } : item));
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     } else {
       const itemAddToCart = { ...product, quantity: parseInt(Number(form.quantity)) };
@@ -64,12 +65,7 @@ export function CardDetail({ product }) {
         ) : (
           <p className="null">{null}</p>
         )}
-
-        {form.quantity > 0 ? (
-          <button className="btn-remove">remover</button>
-        ) : (
           <button onClick={handleOpen}>adicionar</button>
-        )}
       </figcaption>
 
       <Modal
@@ -84,6 +80,9 @@ export function CardDetail({ product }) {
             name="quantity"
             onChange={handleInputChange}
           >
+            <option key={-1} value={-1}>
+                Selecione...
+              </option>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
               <option key={value} value={value}>
                 {value}

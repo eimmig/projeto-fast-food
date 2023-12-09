@@ -1,0 +1,69 @@
+.RegistrationContainer {
+    display: grid;
+   place-items: center;
+   position: absolute;
+   top: 4.25rem;
+   color: #b8b8b8;
+   font-family: Roboto;
+   letter-spacing: -0.29px;
+}
+
+.RegistrationContainer p button {
+    margin-left: 0.5rem;
+ }
+
+ .formEditUser {
+    display: grid;
+   gap: 0.313rem;
+ }
+
+ .formEditUser  legend {
+    text-align: center;
+    margin-bottom: 0.25rem;
+    color: #000;
+ }
+
+ .label {
+    background: #fff;
+    padding: 0 2rem 0.5rem 0.5rem;
+    margin-left: 10px;
+    position: relative;
+    font-size: 0.75rem;
+ }
+
+ .inputEditUser {
+    display: block;
+   margin-top: -8px;
+   border: 1px solid #b8b8b8;
+   border-radius: 4px;
+   height: 3.5rem;
+   font-size: 1rem;
+   min-width: 22.5rem;
+   padding: 1rem;
+   outline: none;
+   ::placeholder {
+      color: #d0d0d0;
+   }
+   :focus {
+      border-color: #e02020;
+   }
+   ::-ms-reveal {
+      display: none;
+   }
+
+   @media screen and (max-width: 800px) {
+      min-width: auto;
+      width: calc(100vw - 2rem);
+   }
+ }
+
+ .buttonEditUser {
+   background: #e8222e;
+   border: none;
+   border-radius: 2px;
+   padding: 0.75rem 1rem;
+   letter-spacing: -0.39px;
+   margin-top: 0.688rem;
+   margin-bottom: 1.75rem;
+   width: 100%;
+ }

@@ -19,12 +19,12 @@ export  class GenericController<T> {
     return await this.genericService.getAll();
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   delete(@Param('id') id: string): void {
     this.genericService.delete(parseInt(id, 10));
   }
 
-  @Put(':id')
+  @Put('/:id')
   update(@Param('id') id: string, @Body() updatedItem: T): void {
     this.genericService.update(parseInt(id, 10), updatedItem);
   }

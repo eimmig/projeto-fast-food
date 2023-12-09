@@ -8,12 +8,12 @@ import house1 from "../../../assets/img/icon/house1.svg";
 import cart1 from "../../../assets/img/icon/cart1.svg";
 import avatar2 from "../../../assets/img/icon/avatar2.svg";
 import { CircularProgress } from "@mui/material";
+import { ProfileEditUser } from "../ProfileEditUser/ProfileEditUser";
 
 export function ProfilePage() {
    const [user, setUser] = useState(null);
    const navigate = useNavigate();
-
-   const userId = localStorage.getItem('userId');
+   const userId = JSON.parse(localStorage.getItem('user')).id;
    useEffect(() => {
       axios.get(`http://localhost:3000/user/get/${userId}`)
       .then(response => {
@@ -40,7 +40,7 @@ export function ProfilePage() {
                         <p>CPF: {user.cpf_cnpj}</p>
                         <p>Telefone: {user.telefone}</p>
                     </div>
-                     <button className="EditIcon" onClick={() => ""}>
+                     <button className="EditIcon" onClick={() => navigate("/profile/edit/user")}>
                         <img src={edit} width="24" alt="Edit icon" />
                      </button>
                   </div>
@@ -50,7 +50,7 @@ export function ProfilePage() {
                         <p>Endereço Cadastrado</p>
                         <p>{user.endereco.rua} - {user.endereco.numero} - {user.endereco.bairro} - {user.endereco.cidade} - {user.endereco.estado}</p>
                      </div>
-                     <button className="EditIcon" onClick={() => ""}>
+                     <button className="EditIcon" onClick={() => navigate("/profile/address")}>
                         <img src={edit} width="24" alt="Edit icon" />
                      </button>
                   </div>
@@ -85,7 +85,7 @@ export function ProfilePage() {
         <div className="Menu">
          <button
            onClick={() => {
-            navigate("/"+localStorage.getItem('company'));
+            navigate("/" + localStorage.getItem('companyId'));
            }}
         >
            <img src={house1} width="27" height="27" alt="Home Icon" />

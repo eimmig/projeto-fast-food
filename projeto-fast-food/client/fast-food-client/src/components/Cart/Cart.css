@@ -3,7 +3,7 @@
    margin-top: 1rem;
 
    @media screen and (max-width: 420px) {
-       margin-top: 6rem;
+      margin-top: 6rem;
    }
 }
 
@@ -49,6 +49,7 @@
 
 .Subtotal p {
    text-transform: uppercase;
+
    &:last-child {
       color: #e8222e;
       font-size: 1.125rem;
@@ -90,7 +91,7 @@
    }
 }
 
-.Button {
+.Button-Confirmar {
    background: #e8222e;
    border: none;
    border-radius: 2px;
@@ -101,8 +102,20 @@
    width: 100%;
 }
 
+.SecondaryCard:last-of-type {
+   margin-bottom: 0.95rem;
+}
+
 .SecondaryCard {
-   &:last-of-type {
-      margin-bottom: 0.95rem;
-   }
+   width: 50%;
+   height: 50%;
+   margin-left: 25%;
+}
+
+.AddressProduct {
+   margin-left: 25%;
+}
+
+.btn-remove {
+   color:red
 }

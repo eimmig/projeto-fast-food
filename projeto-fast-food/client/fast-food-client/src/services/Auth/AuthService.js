@@ -23,8 +23,8 @@ const login = (user) => {
     .post(BASE_URL + "/user/login", user)
     .then((response) => {
       if (response.data) {
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("userId", JSON.stringify(response.data.userId));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         toast.success("Usuário logado com sucesso!");
         window.location.href = '/';
       } else {
@@ -42,8 +42,14 @@ const logout = () => {
   localStorage.removeItem("token")
 };
 
-const isAuthenticated = () => {
-  return localStorage.getItem("token") ? true : false;
+const isAuthenticated = async () => {
+  debugger;
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return false;
+  }
+  const valid = await axios.get(`${BASE_URL}/user/getValidUser/${token}`);
+  return valid;
 };
 
 const AuthService = {
