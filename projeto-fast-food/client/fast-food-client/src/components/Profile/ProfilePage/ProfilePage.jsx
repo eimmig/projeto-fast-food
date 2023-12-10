@@ -8,12 +8,13 @@ import house1 from "../../../assets/img/icon/house1.svg";
 import cart1 from "../../../assets/img/icon/cart1.svg";
 import avatar2 from "../../../assets/img/icon/avatar2.svg";
 import { CircularProgress } from "@mui/material";
-import { ProfileEditUser } from "../ProfileEditUser/ProfileEditUser";
 
 export function ProfilePage() {
    const [user, setUser] = useState(null);
    const navigate = useNavigate();
    const userId = JSON.parse(localStorage.getItem('user')).id;
+   const [orders, setOrders] = useState([]);
+
    useEffect(() => {
       axios.get(`http://localhost:3000/user/get/${userId}`)
       .then(response => {
@@ -22,6 +23,15 @@ export function ProfilePage() {
       .catch(error => {
         console.error('Error:', error);
       });
+
+      axios.get(`http://localhost:3000/pedido/findByUser/${userId}`)
+      .then(response => {
+        setOrders(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching user orders:', error);
+      });
+      
     }, [userId]);
 
    return (
@@ -58,23 +68,13 @@ export function ProfilePage() {
                   <div className="OrderHistory">
                      <h3 className="TitleCard">Histórico de pedidos</h3>
 
-                     <div className="OrderItem">
-                        <p>Bullguer Vila Madalena</p>
-                        <p>23 outubro 2019</p>
-                        <p>SUBTOTAL R$67,00</p>
-                     </div>
-
-                     <div className="OrderItem">
-                        <p>Vinil Burger Butantã</p>
-                        <p>30 Setembro 2019</p>
-                        <p>SUBTOTAL R$89,00</p>
-                     </div>
-
-                     <div className="OrderItem">
-                        <p>Bullguer Vila Madalena</p>
-                        <p>10 Setembro 2019</p>
-                        <p>SUBTOTAL R$77,00</p>
-                     </div>
+                     {orders.map((order, index) => (
+                        <div className="OrderItem" key={index}>
+                           <p>{order.nome}</p>
+                           <p>{order.data}</p>
+                           <p>SUBTOTAL {order.valor}</p>
+                        </div>
+                     ))}
                   </div>
                </>
             ) : (

@@ -8,8 +8,8 @@ import { Categoria } from 'src/model/categoria.model';
 export class CategoriaService extends GenericService<Categoria> { 
   constructor(
     @InjectRepository(Categoria)
-    private readonly pedidoRepository: Repository<Categoria>,
+    private readonly categoriaRepository: Repository<Categoria>,
   ) {
-    super(pedidoRepository)
+    super(categoriaRepository)
   }
 }

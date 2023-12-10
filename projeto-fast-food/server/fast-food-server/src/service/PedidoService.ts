@@ -47,4 +47,12 @@ export class PedidoService extends GenericService<Pedido> {
   
     return newPedido;
   }
+
+  async findByUser(id: number): Promise<Pedido[]> {
+    return this.pedidoRepository.find({
+      where: { usuario: { id } },
+      relations: ['usuario', 'endereco'],
+    });
+  }
+  
 }

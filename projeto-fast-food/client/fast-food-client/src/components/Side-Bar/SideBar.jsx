@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './SideBar.css'; 
 import PainelPage from '../Painel/PainelPage';
 import AuthService from '../../services/Auth/AuthService';
+import GridProdutos from '../produtos/Produtos';
 
 const Sidebar = () => {
   const [isSidebarClosed, setIsSidebarClosed] = useState(false);
@@ -27,9 +28,9 @@ const Sidebar = () => {
       case 'inicio':
         return <PainelPage />;
       case 'pedidos':
-        return <PainelPage />;
-      case 'relatorios':
-        return <PainelPage />;
+        return < PainelPage/>;
+      case 'cadastro':
+        return <GridProdutos />;
       default:
         return <PainelPage />;
     }
@@ -65,19 +66,13 @@ const Sidebar = () => {
                   <span className="text nav-text">Pedidos</span>
                 </a>
               </li>
-              <li className="nav-link p-0"  onClick={() => handleNavItemClick('relatorios')}>
+              <li className="nav-link p-0"  onClick={() => handleNavItemClick('cadastro')}>
                 <a href="#">
                   <i className="fa-solid fa-user icon"></i>
-                  <span className="text nav-text">Relatorios</span>
+                  <span className="text nav-text">Cadastro de Produtos</span>
                 </a>
               </li>
             </ul>
-            <li className="github-box p-0" onClick={() => setIsSidebarClosed(false)}>
-                <a href="#" target="_blank">
-                  <i className="fa-brands fa-github icon"></i>
-                  <span className="text nav-text">GitHub</span>
-                </a>
-            </li>
           </div>
           <div className="botton-content">
             <li className="logout-box p-0" onClick={() => AuthService.logout()}>
