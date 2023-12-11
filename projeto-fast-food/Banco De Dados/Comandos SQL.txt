@@ -25,25 +25,36 @@ CREATE TABLE categoria (
     nome VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE produto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    valor DECIMAL(10, 2) NOT NULL,
-    categoria_id INT,
-    ativo BOOLEAN DEFAULT true,
-    FOREIGN KEY (categoria_id) REFERENCES categoria(id)
-);
+CREATE TABLE `produto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `is_ativo` tinyint NOT NULL DEFAULT '1',
+  `categoriaId` int DEFAULT NULL,
+  `valor` int NOT NULL,
+  `usuario_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_8a1e81267ae184590ce1ee9a39b` (`categoriaId`),
+  KEY `FK_4b195f5c993eebeca45e468d4c1` (`usuario_id`),
+  CONSTRAINT `FK_4b195f5c993eebeca45e468d4c1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_8a1e81267ae184590ce1ee9a39b` FOREIGN KEY (`categoriaId`) REFERENCES `categoria` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    valor_total DECIMAL(10, 2) NOT NULL,
-    usuario_id INT,
-    endereco_id INT,
-    status VARCHAR(20),
-    data_pedido TIMESTAMP,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-    FOREIGN KEY (endereco_id) REFERENCES endereco(id)
-);
+CREATE TABLE `pedido` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuarioId` int DEFAULT NULL,
+  `enderecoId` int DEFAULT NULL,
+  `valor_total` int NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `data_pedido` datetime NOT NULL,
+  `usuarioEmpresaId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_d9798d0c7be0b11327770799621` (`enderecoId`),
+  KEY `FK_440272d326db467ee25802678e8` (`usuarioId`),
+  KEY `FK_1cca68ee1e6e2ed1ffb89205bf5` (`usuarioEmpresaId`),
+  CONSTRAINT `FK_1cca68ee1e6e2ed1ffb89205bf5` FOREIGN KEY (`usuarioEmpresaId`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_440272d326db467ee25802678e8` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_d9798d0c7be0b11327770799621` FOREIGN KEY (`enderecoId`) REFERENCES `endereco` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE pedido_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
