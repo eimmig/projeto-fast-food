@@ -9,8 +9,8 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'g4merbrzica@gmail.com',
-        pass: '01132412Edu',
+        user: 'siteprog123@gmail.com',
+        pass: 'siteprog',
       },
     });
   }
@@ -20,7 +20,7 @@ export class EmailService {
       const newPassword = this.generateRandomPassword(8);
 
       const mailOptions = {
-        from: 'g4merbrzica@gmail.com',
+        from: 'siteprog123@gmail.com',
         to: to,
         subject: 'Recuperação de Senha',
         text: `Sua nova senha: ${newPassword}`,

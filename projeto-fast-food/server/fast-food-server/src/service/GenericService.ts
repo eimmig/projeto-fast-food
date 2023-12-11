@@ -22,8 +22,9 @@ export class GenericService<T> {
     return this.repository.findOneById(id);
   }
 
-  async delete(id: string | number): Promise<void> {
+  async delete(id: string | number): Promise<boolean> {
     await this.repository.delete(id);
+    return true
   }
 
   async update(id: string | number, updatedItem): Promise<void> {

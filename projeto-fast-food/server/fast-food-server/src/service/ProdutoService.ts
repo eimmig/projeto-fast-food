@@ -5,9 +5,11 @@ import { GenericService } from './GenericService';
 import { Produto } from 'src/model/produto.model';
 import { Categoria } from 'src/model/categoria.model';
 import { Usuario } from 'src/model/usuario.model';
+import { Pedido } from 'src/model/pedido.model';
+import { PedidoItem } from 'src/model/pedido_item.model';
 
 @Injectable()
-export class ProdutoService extends GenericService<Produto> { 
+export class ProdutoService extends GenericService<Produto> {
   constructor(
     @InjectRepository(Produto)
     private readonly produtoRepository: Repository<Produto>,
@@ -15,6 +17,8 @@ export class ProdutoService extends GenericService<Produto> {
     private readonly categoriaRepository: Repository<Categoria>,
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
+    @InjectRepository(PedidoItem)
+    private readonly pedidoItemRepository: Repository<PedidoItem>,
   ) {
     super(produtoRepository)
   }
@@ -26,8 +30,8 @@ export class ProdutoService extends GenericService<Produto> {
   async getById(id: number): Promise<Produto | undefined> {
     return await this.produtoRepository.findOne({ where: { id }, relations: ["categoria"] });
   }
-  
-  
+
+
 
   async getByUser(id: number): Promise<Produto[]> {
     return await this.produtoRepository.find({
@@ -58,4 +62,16 @@ export class ProdutoService extends GenericService<Produto> {
     const newproduto = await this.produtoRepository.save(produtoSave);
   }
 
+  async delete(id: number): Promise<boolean> {
+    const pedido = await this.pedidoItemRepository.find({
+      where: { produto: { id } }
+    });
+
+    if (pedido.length > 0) {
+      return false
+    } else
+      await this.produtoRepository.delete(id);
+    return true
+  }
 }
+
