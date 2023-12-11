@@ -4,7 +4,6 @@ const PainelPage = () => {
   return (
     <div className="text">Início
       <div className="">
-        TESTE 
       </div>
     </div>
   );
