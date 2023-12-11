@@ -43,7 +43,6 @@ const logout = () => {
 };
 
 const isAuthenticated = async () => {
-  debugger;
   const token = localStorage.getItem("token");
   if (!token) {
     return false;
@@ -52,11 +51,32 @@ const isAuthenticated = async () => {
   return valid;
 };
 
+const resetPassword = (email) => { 
+  debugger;
+  return axios
+  .post(BASE_URL + "/email/sendEmail", email)
+  .then((response) => {
+    debugger;
+    if (response.data) {
+      toast.success("Email enviado com sucesso!");
+      window.location.href = '/';
+    } else {
+      toast.error("Email não enviado!");
+      return response.data;
+    }
+  })
+  .catch(() => {
+    toast.error("Email não enviado!");
+    return false;
+  });
+}
+
 const AuthService = {
   signup,
   login,
   logout,
   isAuthenticated,
+  resetPassword
 };
 
 export default AuthService;

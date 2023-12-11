@@ -34,6 +34,22 @@ export function ProfilePage() {
       
     }, [userId]);
 
+
+   function formatarDataParaPTBR(dataISO8601) {
+      const data = new Date(dataISO8601);
+    
+      const dia = data.getDate();
+      const mes = data.getMonth() + 1;
+      const ano = data.getFullYear();
+      const hora = data.getHours();
+      const minutos = data.getMinutes();
+      const segundos = data.getSeconds();
+    
+      const dataFormatada = `${dia}/${mes}/${ano} ${hora}:${minutos}:${segundos}`;
+    
+      return dataFormatada;
+    }
+
    return (
       <div className="Container">
          <div className="NavbarContainer">
@@ -70,9 +86,9 @@ export function ProfilePage() {
 
                      {orders.map((order, index) => (
                         <div className="OrderItem" key={index}>
-                           <p>{order.nome}</p>
-                           <p>{order.data}</p>
-                           <p>SUBTOTAL {order.valor}</p>
+                           <p>Cod: {order.id}</p>
+                           <p>Data: {formatarDataParaPTBR(order.data_pedido)}</p>
+                           <p>SUBTOTAL: {order.valor_total}</p>
                         </div>
                      ))}
                   </div>

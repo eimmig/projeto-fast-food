@@ -54,5 +54,25 @@ export class PedidoService extends GenericService<Pedido> {
       relations: ['usuario', 'endereco'],
     });
   }
+
+  async findByEmpresa(id: number): Promise<Pedido[]> {
+    return this.pedidoRepository.find({
+      where: { usuario_empresa: { id } },
+      relations: ['usuario', 'endereco'],
+    });
+  }
+
+  async getById(idPedido: number): Promise<Pedido> {
+    return this.pedidoRepository.findOne({
+      where: { id: idPedido  },
+      relations: ['usuario', 'endereco'],
+    });
+  }
+
+  async update(id: string | number, updatedItem): Promise<void> {
+    const pedido = this.pedidoRepository.findOneById(id);
+    (await pedido).status = updatedItem.status;
+    await this.pedidoRepository.update(id, updatedItem);
+  }
   
 }

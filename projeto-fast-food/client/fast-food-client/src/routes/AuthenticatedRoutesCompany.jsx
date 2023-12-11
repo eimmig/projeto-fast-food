@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {Sidebar} from "../components/Side-Bar/SideBar";
+import Sidebar from "../components/Side-Bar/SideBar";
+
 const AuthenticatedRoutesCompany = () => {
     return (
         <div>

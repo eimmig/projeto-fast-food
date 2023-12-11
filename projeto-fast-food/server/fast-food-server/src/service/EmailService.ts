@@ -7,24 +7,43 @@ export class EmailService {
 
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: 'smtp.example.com',
-      port: 587,
-      secure: false,
+      service: 'gmail',
       auth: {
-        user: 'your_email@example.com',
-        pass: 'your_email_password',
+        user: 'g4merbrzica@gmail.com',
+        pass: '01132412Edu',
       },
     });
   }
 
-  async sendEmail(to: string, subject: string, text: string): Promise<void> {
-    const mailOptions = {
-      from: 'your_email@example.com',
-      to,
-      subject,
-      text,
-    };
+  async sendPasswordRecoveryEmail(to: string): Promise<void> {
+    try {
+      const newPassword = this.generateRandomPassword(8);
 
-    await this.transporter.sendMail(mailOptions);
+      const mailOptions = {
+        from: 'g4merbrzica@gmail.com',
+        to: to,
+        subject: 'Recuperação de Senha',
+        text: `Sua nova senha: ${newPassword}`,
+      };
+
+      // Enviar o e-mail
+      await this.transporter.sendMail(mailOptions);
+
+      console.log('E-mail de recuperação de senha enviado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao enviar e-mail de recuperação de senha:', error);
+    }
+  }
+
+  private generateRandomPassword(length: number): string {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let password = '';
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+
+    return password;
   }
 }

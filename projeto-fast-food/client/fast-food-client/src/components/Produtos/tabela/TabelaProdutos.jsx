@@ -19,8 +19,8 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
   const carregarProdutos = async () => {
     try {
       const response = await axios.get('http://localhost:3000/produto/getByUser/' + JSON.parse(localStorage.getItem('user')).id);
-      setProdutos(response.data);
-      setFilteredProdutos(response.data);
+      setProdutos(response.data.produtos);
+      setFilteredProdutos(response.data.produtos);
     } catch (error) {
       console.error('Erro ao buscar produto:', error);
     }
@@ -28,7 +28,7 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
 
   const excluirProduto = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/produto/${id}`);
+      const resposta = await axios.delete(`http://localhost:3000/produto/${id}`);
       toast.success('Produto Excluído com Sucesso!');
       recarregarTabela();
     } catch (error) {
@@ -71,7 +71,7 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
 
   const atualizarProduto = async (id) => { 
     try {
-      const response = await axios.get(`http://localhost:3000/produto/${id}`);
+      const response = await axios.get(`http://localhost:3000/produto/get/${id}`);
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar o produto:', error);
@@ -80,7 +80,6 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
 
   return (
     <div>
-      <Legend />
       <InputGroup className="mb-1 input-produto">
         <FormControl 
           placeholder="Buscar produto pelo nome..." 
@@ -95,8 +94,8 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
             <th className="text-center col-md-2 small-font">Nome</th>
             <th className="text-center col-md-2 small-font">Categoria</th>
             <th className="text-center col-md-3 small-font">Valor</th>
-            <th className="text-center col-md-3 small-font">Ativo</th>
-            <th className="text-center col-md-1 small-font">Ação</th>
+            <th className="text-center col-md-2 small-font">Ativo</th>
+            <th className="text-center col-md-3 small-font">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -104,7 +103,7 @@ const ProdutosTable = React.forwardRef(({ keyProp, editarProduto }, ref) => {
             <tr key={produto.id}>
               <td className="text-center small-font">{produto.nome}</td>
               <td className="text-center small-font">{produto.categoria.nome}</td>
-              <td className="text-center small-font">{produto.valor}</td>
+              <td className="text-center small-font">R$ {produto.valor}</td>
               <td className="text-center small-font">{produto.ativo ? "Ativo" : "Inativo"}</td>
               <td className="text-center small-font">
                 <Button

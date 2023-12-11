@@ -3,6 +3,7 @@ import './SideBar.css';
 import PainelPage from '../Painel/PainelPage';
 import AuthService from '../../services/Auth/AuthService';
 import GridProdutos from '../produtos/Produtos';
+import GridPedidos from '../Pedidos/Pedido';
 
 const Sidebar = () => {
   const [isSidebarClosed, setIsSidebarClosed] = useState(false);
@@ -28,7 +29,7 @@ const Sidebar = () => {
       case 'inicio':
         return <PainelPage />;
       case 'pedidos':
-        return < PainelPage/>;
+        return < GridPedidos/>;
       case 'cadastro':
         return <GridProdutos />;
       default:
@@ -62,14 +63,14 @@ const Sidebar = () => {
               </li>
               <li className="nav-link p-0"  onClick={() => handleNavItemClick('pedidos')}>
                 <a href="#">
-                  <i className="fa-solid fa-screwdriver-wrench icon"></i>
+                <i className="fa-regular fa-note-sticky icon"></i>
                   <span className="text nav-text">Pedidos</span>
                 </a>
               </li>
               <li className="nav-link p-0"  onClick={() => handleNavItemClick('cadastro')}>
                 <a href="#">
-                  <i className="fa-solid fa-user icon"></i>
-                  <span className="text nav-text">Cadastro de Produtos</span>
+                <i className="fa-solid fa-utensils icon"></i>
+                  <span className="text nav-text">Produtos</span>
                 </a>
               </li>
             </ul>
@@ -77,7 +78,7 @@ const Sidebar = () => {
           <div className="botton-content">
             <li className="logout-box p-0" onClick={() => AuthService.logout()}>
                 <a href="#" target="_blank">
-                    <i class="icon fa-solid fa-door-open"></i>
+                    <i className="icon fa-solid fa-door-open"></i>
                   <span className="text nav-text">Sair</span>
                 </a>
             </li>

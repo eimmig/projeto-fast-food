@@ -28,7 +28,6 @@ export function Cart() {
 
   const removeItem = (idProduto, quantidade) => {
     if (quantidade > 1) {
-      debugger;
       const updatedCart = cart.map((item) => {
         if (idProduto === item.id) {
           return {

@@ -1,11 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
+import { EmailService } from 'src/service/EmailService';
 
 @Controller('email')
 export class  EmailController {
-  constructor() {}
+  constructor(private readonly emailService: EmailService) {}
 
   @Post('/sendEmail')
-  async sendEmail(@Body() userData: any) {
-    //TODO SEND EMAIL
+  async sendPasswordRecoveryEmail(@Body() userData: any) {
+    this.emailService.sendPasswordRecoveryEmail(userData.email);
   }
 }

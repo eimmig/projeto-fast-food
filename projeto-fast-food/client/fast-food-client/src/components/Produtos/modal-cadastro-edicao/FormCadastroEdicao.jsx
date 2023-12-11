@@ -23,6 +23,8 @@ const FormEdicaoCadastro = React.forwardRef(({ produto }, ref) => {
       .catch(error => console.error('Erro ao buscar categorias:', error));
   
     if (produto) {
+      produto.categoria = produto.categoria.id
+      produto.status = produto.is_ativo;
       setFormValues({
         ...produto
       });
@@ -66,7 +68,7 @@ const FormEdicaoCadastro = React.forwardRef(({ produto }, ref) => {
               value={formValues.status}
               onChange={handleInputChange}
             >
-              <option value="">Selecione o risco</option>
+              <option value="">Selecione o status</option>
               <option value="true">Ativo</option>
               <option value="false">Inativo</option>
             </Form.Select>
@@ -75,7 +77,7 @@ const FormEdicaoCadastro = React.forwardRef(({ produto }, ref) => {
           <FloatingLabel className="mb-2" controlId="idCategoria" label="Categoria">
             <Form.Select
               name="idCategoria"
-              value={formValues.idCategoria}
+              value={formValues.categoria}
               onChange={handleInputChange}
             >
               <option value="">Selecione a Categoria</option>

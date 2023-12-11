@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import PedidosTable from './tabela/TabelaPedido';
-import { ToastContainer, toast } from 'react-toastify';
+import PedidosTable from './tabela/TabelaPedidos';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import FormEdicaoCadastro from './modal-cadastro-edicao/FormCadastroEdicao';
 import './Pedidos.css';
-import BodyObserver from '../../observer/BodyObserver';
+import BodyObserver from "../observer/BodyObserver";
 
 const GridPedidos = () => {
   const [showModal, setShowModal] = useState(false);
@@ -93,10 +93,9 @@ const GridPedidos = () => {
             <Button variant="secondary" onClick={handleCloseModal}>
               Fechar
             </Button>
-          </Modal.Footer>m
+          </Modal.Footer>
         </Modal>
-        <PedidoTable key={tableKey} ref={pedidoRef} editarPedido={editarPedido} />
-        <ToastContainer theme={isDarkMode ? 'dark' : 'light'} />
+        <PedidosTable key={tableKey} ref={pedidoRef} editarPedido={editarPedido} />
       </div>
     </div>
   );

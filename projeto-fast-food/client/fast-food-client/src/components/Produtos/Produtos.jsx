@@ -105,7 +105,7 @@ const GridProdutos = () => {
             <Modal.Title>{criacaoEdicao} de Produtos</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormEdicaoCadastro ref={formRef} Produto={produtoModal} />
+            <FormEdicaoCadastro ref={formRef} produto={produtoModal} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={handleSave}>
@@ -117,7 +117,6 @@ const GridProdutos = () => {
           </Modal.Footer>
         </Modal>
         <ProdutosTable key={tableKey} ref={ProdutoRef} editarProduto={editarProduto} />
-        <ToastContainer theme={isDarkMode ? 'dark' : 'light'} />
       </div>
     </div>
   );

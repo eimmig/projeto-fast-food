@@ -20,8 +20,13 @@ export  class GenericController<T> {
   }
 
   @Delete('/:id')
-  delete(@Param('id') id: string): void {
-    this.genericService.delete(parseInt(id, 10));
+  delete(@Param('id') id: string): string {
+    try {
+      this.genericService.delete(parseInt(id, 10));
+      return 'Item deletado com sucesso!';
+    } catch (error) {
+      return 'Erro ao deletar item!';
+    }
   }
 
   @Put('/:id')

@@ -13,4 +13,10 @@ export class  PedidoController extends GenericController<Pedido> {
   async findByUser(@Param('id') id: string): Promise<Pedido[]> {
     return this.pedidoService.findByUser(parseInt(id, 10));
   }
+
+  @Get('/getAllByEmpresa/:id')
+  async getAllEmpresa(@Param('id') id: string): Promise<Pedido[]> {
+    return this.pedidoService.findByEmpresa(parseInt(id, 10));
+  }
+
 }

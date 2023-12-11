@@ -37,7 +37,7 @@ const PasswordResetPage = () => {
               <i className="fa-solid fa-envelope"></i>
               <input type="text" name="email" value={formDataResetPassword.email} placeholder="E-mail" onChange={handleFormResetPasswordChange} />
             </div>
-            <input type="submit" value="Recuperar senha" className="btn solid" />
+            <input type="submit" value="Recuperar" className="btn solid" />
           </form>
         </div>
       </div>
